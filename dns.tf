@@ -1,5 +1,6 @@
 module "dns" {
-  source = "../dns"
+  source  = "dasmeta/dns/aws"
+  version = "0.1.0"
 
   count = var.zone == null ? 0 : 1
 
