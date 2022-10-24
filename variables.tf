@@ -1,6 +1,5 @@
-
 variable "domain" {
-  type        = string
+  type        = list(string)
   description = "domain full name"
 }
 
@@ -15,4 +14,3 @@ variable "waf" {
   default     = null
   description = "waf configs"
 }
-
