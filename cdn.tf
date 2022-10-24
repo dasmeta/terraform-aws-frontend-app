@@ -1,10 +1,10 @@
 
 module "cdn" {
   source  = "dasmeta/modules/aws//modules/cloudfront-ssl-hsts"
-  version = "0.36.7"
+  version = "1.1.2"
 
-  zone       = [var.zone]
-  aliases    = [var.domain]
+  zone       = concat([var.zone], var.alternative_zones)
+  aliases    = concat([var.domain], var.alternative_domains)
   comment    = "cdn for ${var.domain}"
   web_acl_id = try(module.waf[0].web_acl_arn, null)
 

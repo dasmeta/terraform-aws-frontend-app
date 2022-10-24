@@ -1,6 +1,16 @@
 variable "domain" {
-  type        = list(string)
+  type        = string
   description = "domain full name"
+}
+
+variable "alternative_domains" {
+  type    = list(string)
+  default = []
+}
+
+variable "alternative_zones" {
+  type    = list(string)
+  default = []
 }
 
 variable "zone" {
