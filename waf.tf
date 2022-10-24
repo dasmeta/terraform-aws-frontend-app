@@ -17,7 +17,7 @@ module "waf" {
 
   providers = {
     // TODO: for cloudfront distribution the waf gets created in virginia, but for alb the specific region should be used,
-    // needs to decide how to accomplish this  
+    // needs to decide how to accomplish this
     aws = aws.virginia
   }
 }
