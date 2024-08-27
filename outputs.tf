@@ -12,3 +12,7 @@ output "web_acl_id" {
   value       = try(module.waf[0].web_acl_id, null)
   description = "waf arm/id"
 }
+
+output "s3_config" {
+  value = var.s3_configs
+}

@@ -1,21 +1,15 @@
 module "s3" {
-  source  = "dasmeta/modules/aws//modules/s3"
-  version = "0.36.7"
+  source  = "dasmeta/s3/aws"
+  version = "1.2.1"
 
   name                    = var.domain
-  acl                     = "private"
-  create_index_html       = true
-  ignore_public_acls      = false
-  restrict_public_buckets = false
-  block_public_acls       = false
-  block_public_policy     = false
-
-  versioning = {
-    enabled = false
-  }
-  website = {
-    index_document = "index.html"
-    error_document = "index.html"
-  }
-  create_iam_user = false
+  acl                     = var.s3_configs.acl
+  create_index_html       = var.s3_configs.create_index_html
+  ignore_public_acls      = var.s3_configs.ignore_public_acls
+  restrict_public_buckets = var.s3_configs.restrict_public_buckets
+  block_public_acls       = var.s3_configs.block_public_acls
+  block_public_policy     = var.s3_configs.block_public_policy
+  versioning              = var.s3_configs.versioning
+  website                 = var.s3_configs.website
+  create_iam_user         = var.s3_configs.create_iam_user
 }
