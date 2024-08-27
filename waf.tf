@@ -1,6 +1,6 @@
 module "waf" {
   source  = "dasmeta/modules/aws//modules/waf"
-  version = "0.33.4"
+  version = "2.15.6"
 
   count = try(var.waf.enabled, false) ? 1 : 0
 
@@ -14,6 +14,7 @@ module "waf" {
   allow_default_action   = try(var.waf.allow_default_action, true)
   whitelist_ips          = try(var.waf.whitelist_ips, [])
   enable_whitelist       = try(var.waf.enable_whitelist, true)
+  alarms                 = try(var.waf.alarms, true)
 
   providers = {
     // TODO: for cloudfront distribution the waf gets created in virginia, but for alb the specific region should be used,
