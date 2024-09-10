@@ -43,6 +43,7 @@ variable "s3_configs" {
     versioning      = optional(object({ enabled = bool }), { enabled = false })
     website         = optional(object({ index_document = string, error_document = string }), { index_document = "index.html", error_document = "index.html" })
     create_iam_user = optional(bool, false)
+    cors_rule       = optional(list(any),[])
   })
   default = {
     acl                     = "private"
@@ -59,6 +60,7 @@ variable "s3_configs" {
       error_document = "index.html"
     }
     create_iam_user = false
+    cors_rule       = []
   }
   description = "S3 bucket configuration options"
 }
