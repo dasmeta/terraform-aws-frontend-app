@@ -1,7 +1,6 @@
 module "s3" {
-  # source  = "dasmeta/s3/aws"
-  # version = "1.2.1"
-  source = "git::https://github.com/dasmeta/terraform-aws-s3.git?ref=DMVP-5181"
+  source  = "dasmeta/s3/aws"
+  version = "1.2.2"
 
   name                    = var.domain
   acl                     = var.s3_configs.acl
