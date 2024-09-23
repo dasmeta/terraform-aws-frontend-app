@@ -43,8 +43,21 @@ variable "s3_configs" {
     versioning      = optional(object({ enabled = bool }), { enabled = false })
     website         = optional(object({ index_document = string, error_document = string }), { index_document = "index.html", error_document = "index.html" })
     create_iam_user = optional(bool, false)
-    cors_rule       = optional(list(any),[])
+    cors_rule       = optional(list(any), [])
+    event_notification_config = optional(object({
+      target_type   = string,                                        // Target type for the S3 event notification, can be "sqs" or "null". Other target types can be implemented in the future.
+      name_suffix   = string,                                        // Suffix to add to the target name.
+      filter_prefix = string,                                        // Prefix to filter object key names for the event notification.
+      events        = optional(list(string), ["s3:ObjectCreated:*"]) // List of S3 events that trigger the notification. Defaults to "s3:ObjectCreated:*".
+      }), {
+      target_type   = "null"
+      name_suffix   = "event"
+      filter_prefix = "test/"
+      events        = ["s3:ObjectCreated:*"]
+      }
+    )
   })
+
   default = {
     acl                     = "private"
     create_index_html       = true
@@ -61,6 +74,12 @@ variable "s3_configs" {
     }
     create_iam_user = false
     cors_rule       = []
+    event-notification-config = {
+      target_type   = "null"
+      queue_name    = "test"
+      filter_prefix = "test/"
+      events        = ["s3:ObjectCreated:*"]
+    }
   }
   description = "S3 bucket configuration options"
 }
