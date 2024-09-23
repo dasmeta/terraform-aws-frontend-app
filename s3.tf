@@ -14,5 +14,5 @@ module "s3" {
   website                   = var.s3_configs.website
   create_iam_user           = var.s3_configs.create_iam_user
   cors_rule                 = var.s3_configs.cors_rule
-  event-notification-config = var.s3_configs.event-notification-config
+  event_notification_config = var.s3_configs.event_notification_config
 }

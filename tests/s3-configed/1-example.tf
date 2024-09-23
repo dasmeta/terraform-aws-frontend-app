@@ -15,9 +15,9 @@ module "this" {
         expose_headers  = ["ETag", "Access-Control-Allow-Origin"]
       }
     ]
-    event-notification-config = {
+    event_notification_config = {
       target_type   = "sqs"
-      queue_name    = "test"
+      name_suffix   = "event"
       filter_prefix = "test/"
       events        = ["s3:ObjectCreated:*"]
     }
