@@ -43,7 +43,19 @@ variable "s3_configs" {
     versioning      = optional(object({ enabled = bool }), { enabled = false })
     website         = optional(object({ index_document = string, error_document = string }), { index_document = "index.html", error_document = "index.html" })
     create_iam_user = optional(bool, false)
-    cors_rule       = optional(list(any),[])
+    cors_rule       = optional(list(any), [])
+    event-notification-config = optional(object({
+      target_type   = string,
+      queue_name    = string,
+      filter_prefix = string,
+      events        = optional(list(string), ["s3:ObjectCreated:*"])
+      }), {
+      target_type   = "null"
+      queue_name    = "test"
+      filter_prefix = "test/"
+      events        = ["s3:ObjectCreated:*"]
+      }
+    )
   })
   default = {
     acl                     = "private"
@@ -61,6 +73,12 @@ variable "s3_configs" {
     }
     create_iam_user = false
     cors_rule       = []
+    event-notification-config = {
+      target_type   = "null"
+      queue_name    = "test"
+      filter_prefix = "test/"
+      events        = ["s3:ObjectCreated:*"]
+    }
   }
   description = "S3 bucket configuration options"
 }
