@@ -1,6 +1,6 @@
 module "s3" {
   source  = "dasmeta/s3/aws"
-  version = "1.2.3"
+  version = "1.3.1"
 
   name                      = var.domain
   acl                       = var.s3_configs.acl
