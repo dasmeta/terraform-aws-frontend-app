@@ -19,6 +19,12 @@ variable "enable_http_security_headers" {
   description = "Whether to enable http security headers by creating pass through lambda handler for cdn"
 }
 
+variable "certificate_validate" {
+  type        = bool
+  description = "Whether validate the certificate in R53 zone or not."
+  default     = true
+}
+
 variable "zone" {
   type        = string
   default     = null
