@@ -1,9 +1,7 @@
 
 module "cdn" {
-  # source  = "dasmeta/modules/aws//modules/cloudfront-ssl-hsts"
-  # version = "2.18.7"
-
-  source              = "git::https://github.com/dasmeta/terraform-aws-modules.git//modules/cloudfront-ssl-hsts?ref=DMVP-fix-cert"
+  source  = "dasmeta/modules/aws//modules/cloudfront-ssl-hsts"
+  version = "2.18.8"
 
   zone                = concat([var.zone], var.alternative_zones)
   aliases             = concat([var.domain], var.alternative_domains)
