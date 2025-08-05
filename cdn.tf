@@ -1,7 +1,7 @@
 
 module "cdn" {
   source  = "dasmeta/modules/aws//modules/cloudfront-ssl-hsts"
-  version = "2.18.7"
+  version = "2.18.8"
 
   zone                = concat([var.zone], var.alternative_zones)
   aliases             = concat([var.domain], var.alternative_domains)
