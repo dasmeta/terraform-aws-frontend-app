@@ -62,6 +62,7 @@ variable "s3_configs" {
       events        = ["s3:ObjectCreated:*"]
       }
     )
+    lifecycle_rules = optional(any, []) # List of maps containing configuration of object lifecycle management. This can be used to remove expired object based on passed days starting from object creation
   })
 
   default = {

@@ -16,3 +16,9 @@ output "web_acl_id" {
 output "s3_config" {
   value = var.s3_configs
 }
+
+output "s3_data" {
+  value       = module.s3
+  sensitive   = true
+  description = "The created s3 bucket related output data"
+}
