@@ -1,6 +1,6 @@
 module "s3" {
   source  = "dasmeta/s3/aws"
-  version = "1.3.1"
+  version = "1.3.2"
 
   name                      = var.domain
   acl                       = var.s3_configs.acl
@@ -14,4 +14,5 @@ module "s3" {
   create_iam_user           = var.s3_configs.create_iam_user
   cors_rule                 = var.s3_configs.cors_rule
   event_notification_config = var.s3_configs.event_notification_config
+  lifecycle_rules           = var.s3_configs.lifecycle_rules
 }
