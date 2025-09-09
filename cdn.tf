@@ -18,6 +18,7 @@ module "cdn" {
         id          = "s3" # the last one is default origin/behavior, we suppose the front app is default one
         domain_name = module.s3.s3_bucket_id
         type        = "bucket"
+        behavior    = var.cdn_configs.default_behavior
       }
     ]
   )
