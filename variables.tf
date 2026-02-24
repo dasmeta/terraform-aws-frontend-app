@@ -97,7 +97,7 @@ variable "cdn_configs" {
     default_behavior     = optional(any, {})
     additional_origins   = optional(any, [])
     s3_is_default_origin = optional(bool, true)
-    s3_path_pattern      = optional(string, "/static*")
+    s3_path_pattern      = optional(string, "/*")
   })
   default = {
     default_root_object  = "index.html"
