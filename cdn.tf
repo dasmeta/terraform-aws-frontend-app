@@ -1,4 +1,37 @@
 
+locals {
+  s3_origin_base = {
+    id          = "s3"
+    domain_name = module.s3.s3_bucket_id
+    type        = "bucket"
+  }
+
+  s3_origin = var.cdn_configs.s3_is_default_origin ? merge(
+    local.s3_origin_base,
+    {
+      behavior = var.cdn_configs.default_behavior
+    }
+  ) : merge(
+    local.s3_origin_base,
+    {
+      behavior = merge(
+        {
+          path_pattern = var.cdn_configs.s3_path_pattern
+        },
+        try(var.cdn_configs.default_behavior, {})
+      )
+    }
+  )
+
+  cdn_origins = var.cdn_configs.s3_is_default_origin ? concat(
+    var.cdn_configs.additional_origins,
+    [local.s3_origin]
+    ) : concat(
+    [local.s3_origin],
+    var.cdn_configs.additional_origins
+  )
+}
+
 module "cdn" {
   source  = "dasmeta/modules/aws//modules/cloudfront-ssl-hsts"
   version = "2.18.8"
@@ -11,17 +44,7 @@ module "cdn" {
   default_root_object  = var.cdn_configs.default_root_object
   certificate_validate = var.certificate_validate
 
-  origins = concat(
-    var.cdn_configs.additional_origins,
-    [
-      {
-        id          = "s3" # the last one is default origin/behavior, we suppose the front app is default one
-        domain_name = module.s3.s3_bucket_id
-        type        = "bucket"
-        behavior    = var.cdn_configs.default_behavior
-      }
-    ]
-  )
+  origins = local.cdn_origins
 
   providers = {
     aws          = aws
