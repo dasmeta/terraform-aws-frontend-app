@@ -1,11 +1,11 @@
 
 locals {
-  s3_origin_base = {
+  s3_origin_base = [{
     id          = "s3"
     domain_name = module.s3.s3_bucket_id
     type        = "bucket"
     behavior    = try(var.cdn_configs.s3_behavior, {})
-  }
+  }]
 
   cdn_origins = concat(
     local.s3_origin_base,
