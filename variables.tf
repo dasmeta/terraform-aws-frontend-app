@@ -93,13 +93,11 @@ variable "s3_configs" {
 
 variable "cdn_configs" {
   type = object({
-    default_root_object = optional(string, "index.html")
-    default_behavior    = optional(any, {})
-    additional_origins  = optional(any, [])
+    default_root_object  = optional(string, "index.html")
+    s3_behavior          = optional(any, {})
+    s3_is_default_origin = optional(bool, true)
+    additional_origins   = optional(any, [])
   })
-  default = {
-    default_root_object = "index.html"
-    additional_origins  = []
-  }
+  default     = {}
   description = "CDN configuration options"
 }
