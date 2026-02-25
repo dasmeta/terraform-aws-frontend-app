@@ -7,7 +7,7 @@ locals {
     behavior    = try(var.cdn_configs.s3_behavior, {})
   }]
 
-  cdn_origins = s3_is_default_origin ? concat(
+  cdn_origins = var.cdn_configs.s3_is_default_origin ? concat(
     var.cdn_configs.additional_origins,
     local.s3_origin_base
     ) : concat(
